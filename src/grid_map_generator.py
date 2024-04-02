@@ -28,9 +28,8 @@ def generate_map (show: bool):
                     G.add_edge(node, node + i)
     
     if show:
-        pos = nx.multipartite_layout(G)  # Use multipartite layout to draw graph as grid of 10x10
-        nx.draw(G, pos, with_labels=True, font_weight='bold', node_size=300, node_color='skyblue', font_color='black',
-                font_size=8)
+        nx.draw(G, pos=nx.multipartite_layout(G), with_labels=True, font_weight='bold', node_size=300, node_color='skyblue', font_color='black',
+                font_size=8) # Use multipartite layout to draw graph as grid of 10x10
 
         plt.show()
     
