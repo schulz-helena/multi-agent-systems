@@ -4,6 +4,7 @@ from agent import MyAgent
 from grid_map_generator import generate_map
 import networkx as nx
 import matplotlib.pyplot as plt
+from copy import deepcopy
 
 class MyModel(Model):
 
@@ -18,20 +19,11 @@ class MyModel(Model):
             self.positions.append(None)
             a = MyAgent(i, self)
             self.schedule.add(a)
-
-        self.show_map()
+        positions_copy = deepcopy(self.positions)
+        self.positions_all_timesteps = [positions_copy]
+        
 
     def step(self):
         self.schedule.step()
-        self.show_map()
-
-    def show_map(self):
-        color_map = []
-        for node in self.map:
-            if node in self.positions:
-                color_map.append('red')
-            else: 
-                color_map.append('skyblue') 
-        nx.draw(self.map, pos=nx.multipartite_layout(self.map), with_labels=True, font_weight='bold', node_size=300, node_color=color_map, font_color='black',
-                font_size=8)
-        plt.show()
+        positions_copy = deepcopy(self.positions)
+        self.positions_all_timesteps.append(positions_copy)
